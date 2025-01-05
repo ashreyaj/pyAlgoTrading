@@ -11,6 +11,7 @@ def get_logreturns(df, freq=None):
     if freq is not None:
         try:
             df["Price"] = df.resample(freq).mean()
+            df.dropna(inplace=True)
             df["Log Returns"] = np.log(df["Price"]/(df["Price"].shift(1)))
             return df
         except Exception as e:
